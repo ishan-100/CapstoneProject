@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeDealerMgmtAPI", "BikeDealerMgmtAPI.csproj", "{AA8B6D4B-09A4-48F8-937D-76B6099978A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServiceAPI", "..\AuthServiceAPI\AuthServiceAPI.csproj", "{68D8F1BA-E31A-4746-BD5E-A84BE68C9C6C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA8B6D4B-09A4-48F8-937D-76B6099978A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA8B6D4B-09A4-48F8-937D-76B6099978A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA8B6D4B-09A4-48F8-937D-76B6099978A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA8B6D4B-09A4-48F8-937D-76B6099978A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68D8F1BA-E31A-4746-BD5E-A84BE68C9C6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68D8F1BA-E31A-4746-BD5E-A84BE68C9C6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68D8F1BA-E31A-4746-BD5E-A84BE68C9C6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68D8F1BA-E31A-4746-BD5E-A84BE68C9C6C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D66F5BF-8F2E-4E51-98FD-A34A05AB1904}
+	EndGlobalSection
+EndGlobal
