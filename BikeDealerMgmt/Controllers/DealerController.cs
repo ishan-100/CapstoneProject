@@ -18,17 +18,13 @@ namespace BikeDealerMgmtAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
-        {
-            return Ok(_dealerService.GetDealers());
-        }
+        public IActionResult GetAll() => Ok(_dealerService.GetDealers());
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             var dealer = _dealerService.FindDealerById(id);
-            if (dealer == null)
-                return NotFound();
+            if (dealer == null) return NotFound();
 
             return Ok(dealer);
         }
@@ -37,27 +33,25 @@ namespace BikeDealerMgmtAPI.Controllers
         public IActionResult Add(Dealer dealer)
         {
             _dealerService.AddDealer(dealer);
-            return Ok("Dealer added successfully");
+            return Ok("Dealer added successfully.");
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, Dealer dealer)
         {
             var result = _dealerService.UpdateDealer(id, dealer);
-            if (result == 0)
-                return NotFound();
+            if (result == 0) return NotFound();
 
-            return Ok("Dealer updated successfully");
+            return Ok("Dealer updated successfully.");
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             var result = _dealerService.DeleteDealer(id);
-            if (result == 0)
-                return NotFound();
+            if (result == 0) return NotFound();
 
-            return Ok("Dealer deleted successfully");
+            return Ok("Dealer deleted successfully.");
         }
     }
 }
