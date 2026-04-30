@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BikeDealerMgmtAPI.Models
 {
-    [Table("DealerMaster")]   
+    [Table("DealerMasters")]   
     public class DealerMaster
     {
         [Key]
