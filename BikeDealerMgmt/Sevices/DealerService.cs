@@ -25,15 +25,14 @@ namespace BikeDealerMgmtAPI.Services.Implementations
             return _context.Dealers.ToList();
         }
 
-        public Dealer FindDealerById(int id)
+        public Dealer? FindDealerById(int id)
         {
             return _context.Dealers.Find(id);
         }
 
-        public Dealer FindDealerByName(string name)
+        public Dealer? FindDealerByName(string name)
         {
-            return _context.Dealers
-                .FirstOrDefault(d => d.DealerName == name);
+            return _context.Dealers.FirstOrDefault(d => d.DealerName == name);
         }
 
         public int UpdateDealer(int id, Dealer dealer)

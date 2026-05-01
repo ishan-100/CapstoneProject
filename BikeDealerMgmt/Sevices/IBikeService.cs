@@ -1,6 +1,6 @@
 ﻿using BikeDealerMgmtAPI.Models;
 
-namespace BikeDealerMgmtAPI.Sevices
+namespace BikeDealerMgmtAPI.Services
 {
     public interface IBikeService
     {

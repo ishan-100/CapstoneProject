@@ -15,7 +15,7 @@ namespace IdentityWebAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterModel model)
+        public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -29,7 +29,7 @@ namespace IdentityWebAPI.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginModel model)
+        public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -37,7 +37,7 @@ namespace IdentityWebAPI.Controllers
             var result = await _authService.LoginAsync(model);
 
             if (result.status == 0)
-                return Unauthorized(result.token);
+                return Unauthorized("Invalid email or password");
 
             return Ok(new { token = result.token });
         }

@@ -1,6 +1,6 @@
 ﻿using BikeDealerMgmtAPI.Models;
 
-namespace BikeDealerMgmtAPI.Sevices
+namespace BikeDealerMgmtAPI.Services
 {
     public class BikeService : IBikeService
     {
@@ -22,16 +22,15 @@ namespace BikeDealerMgmtAPI.Sevices
             return _context.BikeStores.ToList();
         }
 
-        public Bike FindBikeById(int id)
+        public Bike? FindBikeById(int id)
         {
             return _context.BikeStores.Find(id);
         }
 
-        public Bike FindBikeByName(string name)
+        public Bike? FindBikeByName(string name)
         {
             return _context.BikeStores.FirstOrDefault(b => b.ModelName == name);
         }
-
         public int UpdateBike(int id, Bike bike)
         {
             var existing = _context.BikeStores.Find(id);

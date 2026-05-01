@@ -6,19 +6,25 @@ using Microsoft.EntityFrameworkCore;
 using BikeDealerMgmtAPI.Models;
 using BikeDealerMgmtAPI.Services.Implementations;
 using BikeDealerMgmtAPI.Services.Interfaces;
-using BikeDealerMgmtAPI.Sevices;
+using BikeDealerMgmtAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// DB
 builder.Services.AddDbContext<BikeDealerDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
 
+// Services
 builder.Services.AddScoped<IBikeService, BikeService>();
 builder.Services.AddScoped<IDealerService, DealerService>();
 builder.Services.AddScoped<IDealerMasterService, DealerMasterService>();
+
+// JWT
+var jwtSecret = builder.Configuration["Jwt:Secret"]
+    ?? throw new Exception("JWT Secret missing");
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
@@ -29,18 +35,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-
         ValidIssuer = builder.Configuration["Jwt:ValidIssuer"],
         ValidAudience = builder.Configuration["Jwt:ValidAudience"],
-
         IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(
-                builder.Configuration["Jwt:Secret"]))
+            Encoding.UTF8.GetBytes(jwtSecret))
     };
 });
 
 builder.Services.AddAuthorization();
 
+// CORS — for Angular frontend
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular",
@@ -52,8 +56,8 @@ builder.Services.AddCors(options =>
         });
 });
 
+// Swagger with JWT Bearer support
 builder.Services.AddEndpointsApiExplorer();
-
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -69,7 +73,7 @@ builder.Services.AddSwaggerGen(options =>
         Scheme = "bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Enter token: Bearer {token}"
+        Description = "Enter your JWT token. Example: Bearer eyJhbGci..."
     });
 
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -93,10 +97,11 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
+// REMOVED: app.UseHttpsRedirection()
+// Reason: Gateway routes to HTTP (http://localhost:5219).
+// HttpsRedirection would cause 307 redirects breaking internal calls.
 
 app.UseCors("AllowAngular");
-
 app.UseAuthentication();
 app.UseAuthorization();
 

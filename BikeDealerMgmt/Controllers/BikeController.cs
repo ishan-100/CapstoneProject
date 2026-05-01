@@ -1,8 +1,10 @@
 ﻿using BikeDealerMgmtAPI.Models;
-using BikeDealerMgmtAPI.Sevices;
+using BikeDealerMgmtAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+namespace BikeDealerMgmtAPI.Controllers
+{
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
@@ -19,7 +21,7 @@ using Microsoft.AspNetCore.Mvc;
         public IActionResult GetAll() => Ok(_service.GetBikes());
 
         [HttpPost]
-        public IActionResult Add(Bike bike)
+        public IActionResult Add([FromBody] Bike bike)
         {
             _service.AddBike(bike);
             return Ok();
@@ -35,7 +37,7 @@ using Microsoft.AspNetCore.Mvc;
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, Bike bike)
+        public IActionResult Update(int id, [FromBody] Bike bike)
         {
             var result = _service.UpdateBike(id, bike);
             if (result == 0) return NotFound();
@@ -61,3 +63,4 @@ using Microsoft.AspNetCore.Mvc;
             return Ok(bike);
         }
     }
+}
